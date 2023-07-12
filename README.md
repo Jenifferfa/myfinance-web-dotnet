@@ -1,3 +1,3 @@
-# ![image](https://github.com/Jenifferfa/myfinance-web-dotnet/assets/32148606/4dcdca31-a934-4385-9a33-46332dc0ae76)
+![image](https://github.com/Jenifferfa/myfinance-web-dotnet/assets/32148606/6b7eb7a5-c9bd-415d-9ac4-3a28567bacd3)
 
 MyFinance - Projeto para controle financeuro di curso de Pós-Graduação em engenharia de Software da PUC-MG
