@@ -1,48 +1,47 @@
-﻿@model PlanoContaModel
-
 @{
-    ViewData["Title"] = "Plano Conta";
+    ViewData["Title"] = "Plano de contas";
 }
 
-<div class="text-center">
-    <h1 class="display-4">@ViewData["Title"] </h1>
-</div>
+<h1>@ViewData["Title"]</h1>
 
-<button type="button" class="btn btn-info" onclick="Cadastrar()">Cadastrar Plano Conta</Button></td>
-            
+<button type="button" class="btn btn-primary btn-lg" onclick="goToRegistry()">Criar plano de contas</button>
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col">ID</th>
       <th scope="col">Descrição</th>
       <th scope="col">Tipo</th>
-      <th scope="col">#</th>
-      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     @{
-        foreach(var item in (List<PlanoContaModel>)ViewBag.ListaPlanoConta)
+      foreach(var item in (List<PlanoContaModel>) ViewBag.ListaPlanoConta)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Descricao</td>
-                <td>@item.Tipo</td>
-                <td><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</Button></td>
-                <td><button type="button" class="btn btn-danger">Excluir</Button></td>
-            </tr>
+          <tr>
+            <th scope="row">@item.Id</th>
+            <td>@item.Descricao</td>
+            <td>@item.Tipo</td>
+            <td><button type="button" class="btn btn-warning" onclick="edit(@item.Id.ToString())">Editar</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="remove(@item.Id.ToString())">Remover</button></td>
+          </tr>
         }
     }
   </tbody>
 </table>
 
- <script>  
-    function Editar(id){
-      window.location.href = "../PlanoConta/Cadastro" + id
-    }
-    
-  function Cadastrar(){
+<script>
+    function goToRegistry() {
       window.location.href = "../PlanoConta/Cadastro"
     }
-  </script>
+
+    function edit(id) {
+      window.location.href = "../PlanoConta/Cadastro/" + id
+    }
+
+    function remove(id) {
+      window.location.href = "../PlanoConta/Excluir/" + id
+    }
+</script>

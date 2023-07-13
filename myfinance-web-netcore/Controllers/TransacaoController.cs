@@ -1,20 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-using myfinance_web_netcore.Models;
 using myfinance_web_netcore.Domain.Services.Interfaces;
+using myfinance_web_netcore.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace myfinance_web_netcore.Controllers
 {
     [Route("[controller]")]
-    public class PlanoContaController : Controller
+    public class TransacaoController : Controller
     {
-        private readonly ILogger<PlanoContaController> _logger;
+        private readonly ILogger<TransacaoController> _logger;
+        private readonly ITransacaoService _transacaoService;
         private readonly IPlanoContaService _planoContaService;
 
-        public PlanoContaController(
-            ILogger<PlanoContaController> logger,
+        public TransacaoController(
+            ILogger<TransacaoController> logger,
+            ITransacaoService transacaoService,
             IPlanoContaService planoContaService)
         {
             _logger = logger;
+            _transacaoService = transacaoService;
             _planoContaService = planoContaService;
         }
 
@@ -22,7 +26,7 @@ namespace myfinance_web_netcore.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
-            ViewBag.ListaPlanoConta = _planoContaService.ListarRegistros();
+            ViewBag.Transacoes = _transacaoService.ListarRegistros();
             return View();
         }
 
@@ -31,21 +35,26 @@ namespace myfinance_web_netcore.Controllers
         [Route("Cadastro/{id}")]
         public IActionResult Cadastro(int? id)
         {
+            var model = new TransacaoModel();
+            
             if (id != null)
             {
-                var registro = _planoContaService.RetornarRegistro((int)id);
-                return View(registro);
+                model = _transacaoService.RetornarRegistro((int)id);
             }
 
-            return View();
+            var lista = _planoContaService.ListarRegistros();
+
+            model.PlanoContas = new SelectList(lista, "Id", "Descricao");
+
+            return View(model);
         }
 
         [HttpPost]
         [Route("Cadastro")]
         [Route("Cadastro/{id}")]
-        public IActionResult Cadastro(PlanoContaModel model)
+        public IActionResult Cadastro(TransacaoModel model)
         {
-            _planoContaService.Salvar(model);
+            _transacaoService.Salvar(model);
             return RedirectToAction("Index");
         }
 
@@ -53,7 +62,7 @@ namespace myfinance_web_netcore.Controllers
         [Route("Excluir/{id}")]
         public IActionResult Excluir(int id)
         {
-            _planoContaService.Excluir(id);
+            _transacaoService.Excluir(id);
             return RedirectToAction("Index");
         }
     }
