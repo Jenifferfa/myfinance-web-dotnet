@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using myfinance_web_netcore.Models;
 
-namespace myfinance_web_netcore.Controllers
-{
+namespace myfinance_web_netcore.Controllers;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -28,6 +28,5 @@ namespace myfinance_web_netcore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }    
-}
+    }
 

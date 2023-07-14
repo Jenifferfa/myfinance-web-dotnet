@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using myfinance_web_netcore.Domain.Entities;
 using myfinance_web_netcore.Domain.Services.Interfaces;
 using myfinance_web_netcore.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace myfinance_web_netcore.Domain.Services
 {
