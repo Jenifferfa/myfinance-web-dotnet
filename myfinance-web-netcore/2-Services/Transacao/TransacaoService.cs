@@ -1,9 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using myfinance_web_netcore.Domain.Entities;
-using myfinance_web_netcore.Domain.Services.Interfaces;
+using myfinance_web_netcore.Domain;
+using myfinance_web_netcore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using myfinance_web_netcore.Models;
+using myfinance_web_netcore.Services.Interfaces;
 
-namespace myfinance_web_netcore.Domain.Services
+namespace myfinance_web_netcore.Services.Trasacao
 {
     public class TransacaoService : ITransacaoService
     {

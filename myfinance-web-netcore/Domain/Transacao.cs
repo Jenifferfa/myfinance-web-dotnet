@@ -1,4 +1,4 @@
-namespace myfinance_web_netcore.Domain.Entities
+namespace myfinance_web_netcore.Domain
 {
     public class Transacao
     {

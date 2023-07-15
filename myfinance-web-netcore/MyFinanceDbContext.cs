@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using myfinance_web_netcore.Domain.Entities;
+using myfinance_web_netcore.Domain;
 
 namespace myfinance_web_netcore
 {
@@ -12,6 +12,14 @@ namespace myfinance_web_netcore
         {
             var connectionString = "Server=localhost;Database=myFinance;User=sa;Password=@Wrkze795082;TrustServerCertificate=True";
             optionsBuilder.UseSqlServer(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Transacao>()
+            .ToTable("Transacao")
+            .Property(x => x.PlanoContaId)
+            .HasColumnName("PlanoConta_Id");
         }
     }
 }
