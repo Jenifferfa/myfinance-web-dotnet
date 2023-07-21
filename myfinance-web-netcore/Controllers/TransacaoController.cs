@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using myfinance_web_netcore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using myfinance_web_netcore.Services.Interfaces;
-using myfinance_web_netcore.Services.Trasacao;
 
 namespace myfinance_web_netcore.Controllers
 {
@@ -43,7 +42,7 @@ namespace myfinance_web_netcore.Controllers
                 model = _transacaoService.RetornarRegistro((int)id);
             }
 
-            var lista = _planoContaService.ListarRegistros();
+            var lista = _planoContaService.ListaPlanoContaModel();
 
             model.PlanoContas = new SelectList(lista, "Id", "Descricao");
 

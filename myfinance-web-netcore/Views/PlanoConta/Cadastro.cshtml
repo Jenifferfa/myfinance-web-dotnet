@@ -1,31 +1,27 @@
-@model PlanoContaModel 
+@model PlanoContaModel
 
 @{
-    ViewData["Title"] = "Cadastro de plano de contas";
+    ViewData["Title"] = "Plano Conta";
 }
-
-<h1>@ViewData["Title"]</h1>
-
-<form asp-controller="PlanoConta" asp-action="Cadastro" method="post">
-    <div class="container">
+<div class="text-center">
+    <h1 class="display-4">Cadastro de Plano de Contas</h1>
+</div>
+    <form asp-controller="PlanoConta" asp-action="Cadastro" method="post">
+        <div class="form-control">
+            <div class="mb-3">
+                <label class="form-label">Id</label>
+                <input type="text" class="form-control" asp-for="Id" placeholder="Id" disabled />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <input type="text" class="form-control" asp-for="Descricao" placeholder="Descrição" />
+            </div>
+            <div class="mb-3">
+                <label>@Html.RadioButtonFor(x => x.Tipo, "D")Despesa</label>
+                <label>@Html.RadioButtonFor(x => x.Tipo, "R")Receita</label>
+            </div>
         <div class="mb-3">
-            <label class="form-label">Descrição</label>
-            <input type="hidden" id="txtId" class="form-control" asp-for="Id"/>
-            <input type="text" id="txtNome" class="form-control" asp-for="Descricao"/>
+            <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
         </div>
-         <div class="mb-3">
-            <label>@Html.RadioButtonFor(m => m.Tipo, "D")Despesa</label>
-            <label>@Html.RadioButtonFor(m => m.Tipo, "R")Receita</label>
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-success">Confirmar</button>
-            <button type="button" class="btn btn-danger" onclick="goBack()">Cancelar</button>
-        </div>
-    </div>
-</form>
-
-<script>
-    function goBack() {
-        window.location.href = window.location.protocol + "//" + window.location.host + "/PlanoConta/Index"
-    }
-</script>
+    </form>
+</div>

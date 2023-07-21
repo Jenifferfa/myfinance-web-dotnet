@@ -1,54 +1,53 @@
 @{
-    ViewData["Title"] = "Transações financeiras";
+    ViewData["Title"] = "Transações";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
 
-<button type="button" class="btn btn-primary btn-lg" onclick="goToRegistry()">Registrar transação</button>
+<button type="button" class="btn btn-info" onclick="Cadastrar();">Cadastrar Transação</button>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Data</th>
-      <th scope="col">Histórico</th>
-      <th scope="col">Valor</th>
-      <th scope="col">Tipo de transação</th>
-      <th scope="col">Descrição do Plano de conta</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-   @{
-      foreach(var item in (List<TransacaoModel>) ViewBag.Transacoes)
-        {
-          <tr>
-            <th scope="row">@item.Id</th>
-            <td>@item.Data</td>
-            <td>@item.Historico</td>
-            <td>@item.Valor</td>
-            <td>@item.ItemPlanoConta.Tipo</td>
-            <td>@item.ItemPlanoConta.Descricao</td>
-            <td><button type="button" class="btn btn-warning" onclick="edit(@item.Id.ToString())">Editar</button></td>
-            <td><button type="button" class="btn btn-danger" onclick="remove(@item.Id.ToString())">Remover</button></td>
-          </tr>
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Historico</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Data</th>
+            <th scope="col">Tipo Operação</th>
+            <th scope="col">PlanoContaId</th>
+            <th scope="col">#</th>
+            <th scope="col">#</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in (List<TransacaoModel>)ViewBag.listaPlanoConta)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Historico</td>
+                    <td>@item.Valor</td>
+                    <td>@item.Data</td>
+                    <td>@item.ItemPlanoConta.Tipo</td>
+                    <td>@item.ItemPlanoConta.Descricao</td>
+                    <td><button type="button" class="btn btn-warning" onclick="Editar(@item.Id);">Editar</button></td>
+                    <td><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id);">Excluir</button></td
+                </tr>
+                
+            }
         }
-    }
-  </tbody>
+    </tbody>
 </table>
-
 <script>
-    function goToRegistry() {
+    function Cadastrar(){
         window.location.href = "../Transacao/Cadastro"
     }
-
-
-    function edit(id) {
-      window.location.href = "../Transacao/Cadastro/" + id
+    function Excluir(id){
+        window.location.href = "../Transacao/Excluir/"+id
     }
-
-    function remove(id) {
-      window.location.href = "../Transacao/Excluir/" + id
+    function Editar(id){
+        window.location.href = "../Transacao/Cadastro/"+id
     }
 </script>

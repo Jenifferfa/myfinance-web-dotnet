@@ -7,14 +7,13 @@ namespace myfinance_web_netcore.Application.ObterPlanoContaUseCase
     public class ObterPlanoContaUseCase : IObterPlanoContaUseCase
     {
         private readonly IPlanoContaService _planoContaService;
-
         public ObterPlanoContaUseCase(IPlanoContaService planoContaService)
         {
             _planoContaService = planoContaService;
         }
-
-        public List<PlanoContaModel> GetListaPlanoContaModel()
+        List<PlanoContaModel> IObterPlanoContaUseCase.ListaPlanoContaModel()
         {
+
             return _planoContaService.ListaPlanoContaModel();
         }
     }

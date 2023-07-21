@@ -1,47 +1,50 @@
 using Microsoft.EntityFrameworkCore;
 using myfinance_web_netcore.Domain;
+using myfinance_web_netcore.Repository.Interfaces;
 
 namespace myfinance_web_netcore.Repository
 {
-    public abstract class Repository<TEntity> : IRespository<TEntity> where TEntity: EntityBase, new()
+
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase, new()
     {
-        protected DbContext Db;
-        protected DbSet<TEntity> DbSetContext;
+        protected DbContext DB;
+        protected DbSet<TEntity> DBSetContext;
 
-        protected Repository(DbContext dbContext)
+        protected Repository(DbContext DBContext)
         {
-            Db = dbContext;
-            DbSetContext = Db.Set<TEntity>();
+            DB = DBContext;
+            DBSetContext = DB.Set<TEntity>();
         }
-
         public void Cadastrar(TEntity Entidade)
         {
-            if(Entidade.Id == null)
-                DbSetContext.Add(Entidade);
-            else{
-                DbSetContext.Attach(Entidade);
-                Db.Entry(Entidade).State = EntityState.Modified;
+            if (Entidade.Id == null)
+            {
+                DBSetContext.Add(Entidade);
             }
-            Db.SaveChanges();
+            else
+            {
+                DBSetContext.Attach(Entidade);
+                DB.Entry(Entidade).State = EntityState.Modified;
+            }
+            DB.SaveChanges();
         }
 
-        public void Excluir(int Id)
-        {   
-            var entidade = new TEntity() {Id = Id};
-            Db.Attach(entidade);
-            Db.Remove(entidade);
-            Db.SaveChanges();
+        public void Excluir(int id)
+        {
+            var Entidade = new TEntity() { Id = id };
+            DB.Attach(Entidade);
+            DB.Remove(Entidade);
+            DB.SaveChanges();
         }
 
         public List<TEntity> ListarRegistros()
         {
-            return DbSetContext.ToList();
+            return DBSetContext.ToList();
         }
 
         public TEntity RetornarRegistro(int Id)
         {
-            return DbSetContext.Where(x => x.Id == Id).First();
+            return null;
         }
-        
     }
 }
